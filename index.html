@@ -4,17 +4,31 @@
   <style type="text/css">
     div#video_player_box{ width: 800px; background-color: #000; margin: 0px auto; }
     div#video_controls_bar{ background: #333; padding: 10px; color:#CCC; }
-    input#seekslider{ width: 180px; }
+    input#seekslider{ width: 180px;}
     input#volumeslider{ width:80px; }
+    input[type='range'] {
+              -webkit-appearance: none !important;
+              background: rgb(110, 8, 8);
+          	border:#666 1px solid;
+              height:10px;
+        }
+  input[type='range']::-webkit-slider-thumb {
+        -webkit-appearance: none !important;
+        background: #FFF;
+        height:15px;
+        width:15px;
+    	border-radius:100%;
+    	cursor:pointer;
+    }
   </style>
 
   <script>
     var vid,
         playbtn,
-        seekslider, 
-        curtimetext, 
-        durtimetext, 
-        mutebtn , 
+        seekslider,
+        curtimetext,
+        durtimetext,
+        mutebtn ,
         volumeslider,
         fullscreenbtn;
 
@@ -61,16 +75,16 @@
         var durmins = Math.floor(vid.duration / 60);
         var dursecs = Math.floor(vid.duration - durmins * 60);
         if(cursecs < 10){
-           cursecs = "0"+cursecs; 
+           cursecs = "0"+cursecs;
           }
         if(dursecs < 10){
-           dursecs = "0"+dursecs; 
+           dursecs = "0"+dursecs;
           }
         if(curmins < 10){
-           curmins = "0"+curmins; 
+           curmins = "0"+curmins;
           }
         if(durmins < 10){
-           durmins = "0"+durmins; 
+           durmins = "0"+durmins;
           }
         curtimetext.innerHTML = curmins+":"+cursecs;
         durtimetext.innerHTML = durmins+":"+dursecs
