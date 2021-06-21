@@ -1,35 +1,6 @@
 <!DOCTYPE html>
 <head>
-
-  <style type="text/css">
-    div#video_player_box{ width: 800px; background-color: #000; margin: 0px auto; }
-    div#video_controls_bar{ background: rgb(117, 51, 51); padding: 10px; color:#CCC; }
-    button#playpausebtn{
-            background:url(pause.png);
-            border:none;
-            width:16px;
-            height:18px;
-            cursor:pointer;
-            opacity:0.5;
-          }
-button#playpausebtn:hover{ opacity:1; }
-    input#seekslider{ width: 180px;}
-    input#volumeslider{ width:80px; }
-    input[type='range'] {
-              -webkit-appearance: none !important;
-              background: rgb(110, 8, 8);
-          	border:#666 1px solid;
-              height:10px;
-        }
-  input[type='range']::-webkit-slider-thumb {
-        -webkit-appearance: none !important;
-        background: #FFF;
-        height:15px;
-        width:15px;
-    	border-radius:100%;
-    	cursor:pointer;
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="controls.css">
 
   <script>
     var vid,
@@ -66,10 +37,10 @@ button#playpausebtn:hover{ opacity:1; }
 
         if (vid.paused) {
           vid.play();
-          playbtn.innerHTML = "Pause";
+          playbtn.style.background = "url(https://fonts.gstatic.com/s/i/materialiconsoutlined/pause/v14/24px.svg)";
         }else {
           vid.pause();
-          playbtn.innerHTML = "Play";
+          playbtn.style.background = "url(https://fonts.gstatic.com/s/i/materialiconsoutlined/play_circle_filled/v13/24px.svg)";
         }
       }
     function vidSeek(){
@@ -133,7 +104,7 @@ button#playpausebtn:hover{ opacity:1; }
   </form>
 
   <div id="video_player_box">
-    <video id="my_video" autoplay  height="320" width="800"
+    <video id="my_video" autoplay  height="320" width="100%"
       src="videos/video.mp4" type="video/*">
       <!-- <source src="https://youtu.be/kUzDC9fUtcM" type="video/*"> -->
       <!-- src="videos/video.mp4" type="video/*"> -->
@@ -141,11 +112,14 @@ button#playpausebtn:hover{ opacity:1; }
 
     <div id="video_controls_bar">
       <button id="playpausebtn"></button>
+      <button id="fastfowardbtn"></button>
       <input id="seekslider" type="range" min="0" max="100" value="0" step="1">
       <span id="curtimetext">00:00</span> / <span id="durtimetext">00:00</span>
-      <button id="mutebtn">Mute</button>
+      <button id="mutebtn"></button>
       <input id="volumeslider" type="range" min="0" max="100" value="100" step="1">
-      <button id="fullscreenbtn">[ &nbsp; ]</button>
+      <button id="settingsbtn"></button>
+      <button id="bookmarkbtn"></button>
+      <button id="fullscreenbtn"></button>
     </div>
   </div>
 
