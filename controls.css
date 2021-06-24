@@ -149,3 +149,16 @@ button#fullscreenbtn{
   opacity:0.5;
   margin:3px 10px 3px;
 }
+#mainMenu {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#menu{
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  text-align: center;
+  background-color: red; 
+}
