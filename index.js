@@ -25,3 +25,12 @@ ipcMain.on('videosubmit' , ( event , path)=> {
     console.log('Video duration is :' , metadata.format.duration);
   });
 });
+
+function myFunction() {
+  var x = document.getElementById("menu");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
