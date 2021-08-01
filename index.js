@@ -1,10 +1,10 @@
-const electron = require('electron');
-const ffmpeg = require('fluent-ffmpeg');
+const electron = require("electron");
+const ffmpeg = require("fluent-ffmpeg");
 //const path = require('path')
 
-const {app , BrowserWindow , ipcMain} = electron;
+const { app, BrowserWindow, ipcMain } = electron;
 
-app.on('ready' , () => {
+app.on("ready", () => {
   const mainWindow = new BrowserWindow({
     webPreferences: {
       //nodeIntegration: true
@@ -12,17 +12,17 @@ app.on('ready' , () => {
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: true,
-      webSecurity: false
-    }
+      webSecurity: false,
+    },
   });
 
   //mainWindow.loadURL("https//:www.google.com");
   mainWindow.loadURL(`file://${__dirname}/index.html`);
 });
 
-ipcMain.on('videosubmit' , ( event , path)=> {
-  ffmpeg.ffprobe( path ,(err , metadata) => {
-    console.log('Video duration is :' , metadata.format.duration);
+ipcMain.on("videosubmit", (event, path) => {
+  ffmpeg.ffprobe(path, (err, metadata) => {
+    console.log("Video duration is :", metadata.format.duration);
   });
 });
 
