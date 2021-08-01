@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <head>
   <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" type="text/css" href="controls.css">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" type="text/css" href="controls.css" />
 
   <script>
     var vid,
-        playbtn,
-        seekslider,
-        curtimetext,
-        durtimetext,
-        mutebtn ,
-        volumeslider,
-        fullscreenbtn;
+      playbtn,
+      seekslider,
+      curtimetext,
+      durtimetext,
+      mutebtn,
+      volumeslider,
+      fullscreenbtn;
 
-    function initializePlayer(){
+    function initializePlayer() {
       //Set object references
       vid = document.getElementById("my_video");
       playbtn = document.getElementById("playpausebtn");
@@ -27,113 +27,114 @@
       fullscreenbtn = document.getElementById("fullscreenbtn");
 
       //Add event listeners
-      playbtn.addEventListener("click",playPause,false);
-      seekslider.addEventListener("change",vidSeek,false);
-      vid.addEventListener("timeupdate",seektimeupdate,false);
-      mutebtn.addEventListener("click",vidmute,false);
-      volumeslider.addEventListener("change",setvolume,false);
-      fullscreenbtn.addEventListener("click",toggleFullScreen,false);
+      playbtn.addEventListener("click", playPause, false);
+      seekslider.addEventListener("change", vidSeek, false);
+      vid.addEventListener("timeupdate", seektimeupdate, false);
+      mutebtn.addEventListener("click", vidmute, false);
+      volumeslider.addEventListener("change", setvolume, false);
+      fullscreenbtn.addEventListener("click", toggleFullScreen, false);
     }
     window.onload = initializePlayer;
 
-      function playPause(){
-
-        if (vid.paused) {
-          vid.play();
-          playbtn.style.background = "url(https://fonts.gstatic.com/s/i/materialiconsoutlined/pause/v14/24px.svg)";
-        }else {
-          vid.pause();
-          playbtn.style.background = "url(https://fonts.gstatic.com/s/i/materialiconsoutlined/play_circle_filled/v13/24px.svg)";
-        }
+    function playPause() {
+      if (vid.paused) {
+        vid.play();
+        playbtn.style.background =
+          "url(https://fonts.gstatic.com/s/i/materialiconsoutlined/pause/v14/24px.svg)";
+      } else {
+        vid.pause();
+        playbtn.style.background =
+          "url(https://fonts.gstatic.com/s/i/materialiconsoutlined/play_circle_filled/v13/24px.svg)";
       }
-    function vidSeek(){
-        var seekto = vid.duration * (seekslider.value / 100);
-        vid.currentTime = seekto;
+    }
+    function vidSeek() {
+      var seekto = vid.duration * (seekslider.value / 100);
+      vid.currentTime = seekto;
+    }
+    function seektimeupdate() {
+      var nt = vid.currentTime * (100 / vid.duration);
+      seekslider.value = nt;
+      var curmins = Math.floor(vid.currentTime / 60);
+      var cursecs = Math.floor(vid.currentTime - curmins * 60);
+      var durmins = Math.floor(vid.duration / 60);
+      var dursecs = Math.floor(vid.duration - durmins * 60);
+      if (cursecs < 10) {
+        cursecs = "0" + cursecs;
       }
-    function seektimeupdate(){
-        var nt = vid.currentTime * (100 / vid.duration);
-        seekslider.value = nt;
-        var curmins = Math.floor(vid.currentTime / 60);
-        var cursecs = Math.floor(vid.currentTime - curmins * 60);
-        var durmins = Math.floor(vid.duration / 60);
-        var dursecs = Math.floor(vid.duration - durmins * 60);
-        if(cursecs < 10){
-           cursecs = "0"+cursecs;
-          }
-        if(dursecs < 10){
-           dursecs = "0"+dursecs;
-          }
-        if(curmins < 10){
-           curmins = "0"+curmins;
-          }
-        if(durmins < 10){
-           durmins = "0"+durmins;
-          }
-        curtimetext.innerHTML = curmins+":"+cursecs;
-        durtimetext.innerHTML = durmins+":"+dursecs
+      if (dursecs < 10) {
+        dursecs = "0" + dursecs;
       }
+      if (curmins < 10) {
+        curmins = "0" + curmins;
+      }
+      if (durmins < 10) {
+        durmins = "0" + durmins;
+      }
+      curtimetext.innerHTML = curmins + ":" + cursecs;
+      durtimetext.innerHTML = durmins + ":" + dursecs;
+    }
     function vidmute() {
-        if (vid.muted) {
-          vid.muted = false;
-          mutebtn.innerHTML = "Mute";
-        }else {
-          vid.muted = true;
-          mutebtn.innerHTML = "Unmute";
-        }
+      if (vid.muted) {
+        vid.muted = false;
+        mutebtn.innerHTML = "Mute";
+      } else {
+        vid.muted = true;
+        mutebtn.innerHTML = "Unmute";
       }
-      function setvolume(){
-        vid.volume = volumeslider.value /100 ;
+    }
+    function setvolume() {
+      vid.volume = volumeslider.value / 100;
+    }
+    function toggleFullScreen() {
+      if (vid.requestFullScreen) {
+        vid.requestFullScreen();
       }
-      function toggleFullScreen(){
-        if (vid.requestFullScreen) {
-          vid.requestFullScreen();
-        }if (vid.webkitRequestFullScreen) {
-          vid.webkitRequestFullScreen();
-        }if (vid.mozRequestFullScreen) {
-          vid.mozRequestFullScreen();
-        }
+      if (vid.webkitRequestFullScreen) {
+        vid.webkitRequestFullScreen();
       }
+      if (vid.mozRequestFullScreen) {
+        vid.mozRequestFullScreen();
+      }
+    }
 
-      function myFunction() {
-          var x = document.getElementById("menu")
-          displayValue = "";
-    if (x.style.display == "")
-        displayValue = "none";
+    function myFunction() {
+      var x = document.getElementById("menu");
+      displayValue = "";
+      if (x.style.display == "") displayValue = "none";
 
-    x.style.display = displayValue;
-}
+      x.style.display = displayValue;
+    }
   </script>
 </head>
 
 <body>
   <h1>Video Info</h1>
-  <form >
+  <form>
     <div class="">
       <label for="">Select a video</label>
-      <input type="file" accept="video/*">
+      <input type="file" accept="video/*" />
     </div>
     <button type="submit">Get Into</button>
   </form>
 
   <div id="video_player_box">
     <div id="mainMenu">
-      <video id="my_video" autoplay  class="video"
-      
-        src="videos/video.mp4" type="video/*">
-        
-        
-      </video>
+      <video
+        id="my_video"
+        autoplay
+        class="video"
+        src="videos/video.mp4"
+        type="video/*"
+      ></video>
 
-      <div id="menu" style="display:none">
+      <div id="menu" style="display: none">
         <div id="submenu">
           <button class="menubtn">settings</button>
           <button class="menubtn">audio</button>
           <button class="menubtn">subtitles</button>
         </div>
 
-        <div id="rightmenu">
-          This is my DIV element.
-        </div>
+        <div id="rightmenu">This is my DIV element.</div>
       </div>
     </div>
 
@@ -147,10 +148,18 @@
         <div class="video-progress-filled"></div>
       </div>
       <div class="time">
-        <span id="curtimetext">00:00</span> / <span id="durtimetext">00:00</span>
+        <span id="curtimetext">00:00</span> /
+        <span id="durtimetext">00:00</span>
       </div>
       <button id="mutebtn"></button>
-      <input id="volumeslider" type="range" min="0" max="100" value="100" step="1">
+      <input
+        id="volumeslider"
+        type="range"
+        min="0"
+        max="100"
+        value="100"
+        step="1"
+      />
       <button id="settingsbtn" onclick="myFunction()"></button>
       <button id="bookmarkbtn"></button>
       <button id="fullscreenbtn"></button>
@@ -158,24 +167,25 @@
   </div>
 
   <script>
-    const electron = require('electron');
+    const electron = require("electron");
     //import electron from 'electron';
     const { ipcRenderer } = electron;
 
-    document.querySelector('form').addEventListener('submit', (event)=> {event.preventDefault();
+    document.querySelector("form").addEventListener("submit", (event) => {
+      event.preventDefault();
 
-    const { path } = document.querySelector('input').files[0];
+      const { path } = document.querySelector("input").files[0];
 
-    ipcRenderer.send('videosubmit', path);
+      ipcRenderer.send("videosubmit", path);
     });
 
-//     function myFunction() {
-//   var x = document.getElementById("menu");
-//   if (x.style.display === "none") {
-//     x.style.display = "block";
-//   } else {
-//     x.style.display = "none";
-//   }
-// }
+    //     function myFunction() {
+    //   var x = document.getElementById("menu");
+    //   if (x.style.display === "none") {
+    //     x.style.display = "block";
+    //   } else {
+    //     x.style.display = "none";
+    //   }
+    // }
   </script>
 </body>
